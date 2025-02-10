@@ -6,30 +6,39 @@ import com.moxos.uab.common.enums.*;
 import com.moxos.uab.common.util.RequestUtils;
 import com.moxos.uab.domain.dto.request.DetallePeriodoProgramacion.DetallePeriodoProgramacionRequest;
 import com.moxos.uab.domain.dto.request.DetallePeriodoProgramacion.ParametroPeiRequest;
+import com.moxos.uab.domain.dto.request.accionestrategica.AccionEstrategicaRequest;
 import com.moxos.uab.domain.dto.request.aperturasprogramaticas.AperturasProgramaticasResponse;
 import com.moxos.uab.domain.dto.request.areasestrategicas.AreasEstrategicasRequest;
 import com.moxos.uab.domain.dto.request.catalogoindicadores.CatalogoIndicadoresRequest;
 import com.moxos.uab.domain.dto.request.catalogoindicadores.ParametroAreaEstrategicaRequest;
 import com.moxos.uab.domain.dto.request.categoriaindicador.CategoriaIndicadorRequest;
+import com.moxos.uab.domain.dto.request.evaluaciondesempeno.EvaluacionDesempenoRequest;
 import com.moxos.uab.domain.dto.request.general.IndexViewModelFilter;
 import com.moxos.uab.domain.dto.request.general.ParametrosPaginacionBusquedaRequest;
 import com.moxos.uab.domain.dto.request.general.SelectListItemDto;
 import com.moxos.uab.domain.dto.request.indicadoresestrategicos.IndicadoresEstrategicosRequest;
+import com.moxos.uab.domain.dto.request.objetivosestrategicos.ObjetivosEstrategicosRequest;
 import com.moxos.uab.domain.dto.request.pei.PeiRequest;
 import com.moxos.uab.domain.dto.request.politicasdesarrollo.PoliticasDesarrolloRequest;
+import com.moxos.uab.domain.dto.request.resultadosgestion.ResultadosGestionRequest;
 import com.moxos.uab.domain.dto.request.tipoindicador.TipoIndicadorRequest;
 import com.moxos.uab.domain.dto.request.unidadmedida.UnidadMedidaRequest;
 import com.moxos.uab.domain.dto.response.DetallePeriodoProgramacion.DetallePeriodoProgramacionResponse;
 import com.moxos.uab.domain.dto.response.GeneralResponse;
 import com.moxos.uab.domain.dto.response.Response;
+import com.moxos.uab.domain.dto.response.accionestrategica.AccionEstrategicaDetalleResponse;
+import com.moxos.uab.domain.dto.response.accionestrategica.AccionEstrategicaResponse;
 import com.moxos.uab.domain.dto.response.aperturasprogramaticas.AperturasProgramaticasRequest;
 import com.moxos.uab.domain.dto.response.areasestrategicas.AreaEstrategicaResponse;
 import com.moxos.uab.domain.dto.response.areasestrategicas.AreasEstrategicasDeleteResponse;
 import com.moxos.uab.domain.dto.response.catalogoindicadores.CatalogoIndicadoresResponse;
 import com.moxos.uab.domain.dto.response.categoriaindicador.CategoriaIndicadorResponse;
+import com.moxos.uab.domain.dto.response.evaluaciondesempeno.EvaluacionDesempenoResponse;
 import com.moxos.uab.domain.dto.response.indicadoresestrategicos.IndicadoresEstrategicosResponse;
+import com.moxos.uab.domain.dto.response.objetivosestrategicos.ObjetivosEstrategicosResponse;
 import com.moxos.uab.domain.dto.response.pei.PeiResponse;
 import com.moxos.uab.domain.dto.response.politicasdesarrollo.PoliticasDesarrolloResponse;
+import com.moxos.uab.domain.dto.response.resultadosgestion.ResultadosGestionResponse;
 import com.moxos.uab.domain.dto.response.tipoindicador.TipoIndicadorResponse;
 import com.moxos.uab.domain.dto.response.unidadmedida.UnidadMedidaResponse;
 import com.moxos.uab.domain.dto.response.view.ListView;
@@ -49,13 +58,17 @@ public class PoliticasIndicadoresAreasFacadeImpl implements IPoliticasIndicadore
     private final IPeiService peiService;
     private final IDetallePeriodoProgramacionService detallePeriodoProgramacionService;
     private final ModelMapper modelMapper;
+    private final IObjetivosEstrategicosService objetivosEstrategicosService;
+    private final IAccionesEstrategicasService accionesEstrategicasService;
     private final PlanesDao planesDao;
     private final ICategoriaIndicadorService categoriaIndicadorService;
     private final ITipoIndicadorService tipoIndicadorService;
     private final IUnidadMedidaService unidadMedidaService;
     private final IAperturasProgramaticasService aperturasProgramaticasService;
+    private final IEvaluacionDesempenoService evaluacionDesempenoService;
+    private final IResultadosGestionService resultadosGestionService;
 
-    public PoliticasIndicadoresAreasFacadeImpl(IAreasEstrategicasService areasEstrategicasService, IPoliticasDesarrolloService politicasDesarrolloService, IConfigurationService configurationService, IIndicadoresEstrategicosService indicadoresEstrategicosService, ICatalogoIndicadoresService catalogoIndicadoresService, IPeiService peiService, IDetallePeriodoProgramacionService detallePeriodoProgramacionService, ModelMapper modelMapper, PlanesDao planesDao, ICategoriaIndicadorService categoriaIndicadorService, ITipoIndicadorService tipoIndicadorService, IUnidadMedidaService unidadMedidaService, IAperturasProgramaticasService aperturasProgramaticasService) {
+    public PoliticasIndicadoresAreasFacadeImpl(IAreasEstrategicasService areasEstrategicasService, IPoliticasDesarrolloService politicasDesarrolloService, IConfigurationService configurationService, IIndicadoresEstrategicosService indicadoresEstrategicosService, ICatalogoIndicadoresService catalogoIndicadoresService, IPeiService peiService, IDetallePeriodoProgramacionService detallePeriodoProgramacionService, ModelMapper modelMapper, IObjetivosEstrategicosService objetivosEstrategicosService, IAccionesEstrategicasService accionesEstrategicasService, PlanesDao planesDao, ICategoriaIndicadorService categoriaIndicadorService, ITipoIndicadorService tipoIndicadorService, IUnidadMedidaService unidadMedidaService, IAperturasProgramaticasService aperturasProgramaticasService, IEvaluacionDesempenoService evaluacionDesempenoService, IResultadosGestionService resultadosGestionService) {
         this.areasEstrategicasService = areasEstrategicasService;
         this.politicasDesarrolloService = politicasDesarrolloService;
         this.configurationService = configurationService;
@@ -64,11 +77,15 @@ public class PoliticasIndicadoresAreasFacadeImpl implements IPoliticasIndicadore
         this.peiService = peiService;
         this.detallePeriodoProgramacionService = detallePeriodoProgramacionService;
         this.modelMapper = modelMapper;
+        this.objetivosEstrategicosService = objetivosEstrategicosService;
+        this.accionesEstrategicasService = accionesEstrategicasService;
         this.planesDao = planesDao;
         this.categoriaIndicadorService = categoriaIndicadorService;
         this.tipoIndicadorService = tipoIndicadorService;
         this.unidadMedidaService = unidadMedidaService;
         this.aperturasProgramaticasService = aperturasProgramaticasService;
+        this.evaluacionDesempenoService = evaluacionDesempenoService;
+        this.resultadosGestionService = resultadosGestionService;
     }
 
     @Override
@@ -180,6 +197,90 @@ public class PoliticasIndicadoresAreasFacadeImpl implements IPoliticasIndicadore
     public List<ListView> getPei() {
         return List.of();
     }
+
+    @Override
+    public ObjetivosEstrategicosRequest getObjetivosEstrategicosModel(int idObjetivo) {
+        var response = objetivosEstrategicosService.getByid(idObjetivo);
+        return modelMapper.map(response.getResult(), ObjetivosEstrategicosRequest.class);
+    }
+
+    @Override
+    public Response<ObjetivosEstrategicosResponse> saveObjetivosEstrategicos(ObjetivosEstrategicosRequest objetivosEstrategico) {
+        Response<Integer> result = objetivosEstrategicosService.saveObjetivosEstrategicos(objetivosEstrategico);
+        return objetivosEstrategicosService.getByid(result.getResult());
+    }
+
+    @Override
+    public GeneralResponse deleteObjetivosEstrategicos(ObjetivosEstrategicosRequest model) {
+        return objetivosEstrategicosService.deleteObjetivosEstrategicos(model);
+    }
+
+    @Override
+    public AccionEstrategicaRequest getAccionesEstrategicasModel(int idAcciones) {
+        var response = accionesEstrategicasService.getByid(idAcciones);
+        return modelMapper.map(response.getResult(), AccionEstrategicaRequest.class);
+    }
+
+    @Override
+    public AccionEstrategicaDetalleResponse getAccionesEstrategicasDetalle(int idAcciones) {
+        var response = accionesEstrategicasService.getDetalleByid(idAcciones);
+        return response.getResult();
+    }
+
+    @Override
+    public Response<AccionEstrategicaResponse> saveAccionesEstrategicas(AccionEstrategicaRequest accionesEstrategica) {
+        Response<Integer> result = accionesEstrategicasService.saveAccionEstrategica(accionesEstrategica);
+        return accionesEstrategicasService.getByid(result.getResult());
+    }
+
+    @Override
+    public GeneralResponse deleteAccionesEstrategicas(AccionEstrategicaRequest model) {
+        return accionesEstrategicasService.deleteAccionEstrategica(model);
+    }
+
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
+
+    @Override
+    public ResultadosGestionRequest getResultadosGestionModel(int idResultados) {
+        var response= resultadosGestionService.getById(idResultados);
+        return modelMapper.map(response.getResult(), ResultadosGestionRequest.class);
+    }
+
+    @Override
+    public Response<ResultadosGestionResponse> saveResultadosGestion(ResultadosGestionRequest resultadosGestion) {
+        Response<Integer> result = resultadosGestionService.saveResultadosGestion(resultadosGestion);
+        return resultadosGestionService.getById(result.getResult());
+    }
+
+    @Override
+    public GeneralResponse deleteResultadosGestion(ResultadosGestionRequest model) {
+        return resultadosGestionService.deleteResultadosGestion(model);
+    }
+
+    @Override
+    public EvaluacionDesempenoRequest getEvaluacionDesempeno(int idEvaluacion) {
+        var response= evaluacionDesempenoService.getByid(idEvaluacion);
+        return modelMapper.map(response.getResult(), EvaluacionDesempenoRequest.class);
+    }
+
+    @Override
+    public Response<EvaluacionDesempenoResponse> saveEvaluacionDesempeno(EvaluacionDesempenoRequest evaluacionDesempenoRequest) {
+        Response<Integer> result=evaluacionDesempenoService.saveEvaluacionDesempeno(evaluacionDesempenoRequest);
+        return evaluacionDesempenoService.getByid(result.getResult());
+    }
+
+    @Override
+    public GeneralResponse deleteEvaluacionDesempeno(EvaluacionDesempenoRequest model) {
+        return evaluacionDesempenoService.deleteEvaluacionDesempeno(model);
+    }
+
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
+    //----Fin Resultado Gestion || Evaluacion Desempeno: Cesar---
 
     @Override
     public IndexViewModelFilter<DetallePeriodoProgramacionResponse, Integer> getDetallePeriodoProgramacion(ParametrosPaginacionBusquedaRequest<ParametroPeiRequest> busqueda) {
@@ -407,6 +508,11 @@ public class PoliticasIndicadoresAreasFacadeImpl implements IPoliticasIndicadore
     }
 
     @Override
+    public List<ListView> getAreasEstrategica() {
+        return areasEstrategicasService.listAreaEstrategicas().getResult();
+    }
+
+    @Override
     public IndexViewModelFilter<CategoriaIndicadorResponse, Integer> getCategoriaIndicador(ParametrosPaginacionBusquedaRequest<Integer> model) {
         //Clase generica para la paginacion
         IndexViewModelFilter<CategoriaIndicadorResponse, Integer> filtro = new IndexViewModelFilter<>();
@@ -624,5 +730,11 @@ public class PoliticasIndicadoresAreasFacadeImpl implements IPoliticasIndicadore
     @Override
     public List<ListView> getListaAperturasProgramaticas() {
         return aperturasProgramaticasService.getListaAperturasProgramaticas().getResult();
+    }
+
+    @Override
+    public ListView getCatalogoIndicador(Integer id) {
+        var response = catalogoIndicadoresService.itemCatalogoIndicador(id).getResult();
+        return new ListView(response.getId_catalogo_indicador_pei().toString(), response.getDenominacion_indicador());
     }
 }
