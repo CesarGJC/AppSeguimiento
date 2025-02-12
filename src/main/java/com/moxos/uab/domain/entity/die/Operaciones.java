@@ -6,11 +6,12 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class EvaluacionDesempeno extends Entidad {
-    private int id_evaluacion_desempeno;
-    private int id_resultados;
+public class Operaciones extends Entidad {
+    private int id_operaciones;
     private int id_resultados_gestion;
     private int id_programa;
+    private int id_departamento;
+    private String operaciones;
     private String titulo;
     private String descripcion;
     private String elaborador;
@@ -18,4 +19,8 @@ public class EvaluacionDesempeno extends Entidad {
     private String vistas;
     private Date fec_publicacion;
     private int descargas;
+
+    private String resultados_gestion;
+    private String programa;
+    private String departamento;
 }

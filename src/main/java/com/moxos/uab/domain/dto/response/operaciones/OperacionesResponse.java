@@ -1,4 +1,4 @@
-package com.moxos.uab.domain.dto.response.evaluaciondesempeno;
+package com.moxos.uab.domain.dto.response.operaciones;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,11 +7,12 @@ import java.util.Date;
 
 @Data
 @NoArgsConstructor
-public class EvaluacionDesempenoResponse {
-    private int id_evaluacion_desempeno;
-    private int id_resultados;
+public class OperacionesResponse {
+    private int id_operaciones;
     private int id_resultados_gestion;
     private int id_programa;
+    private int id_departamento;
+    private String operaciones;
     private String titulo;
     private String descripcion;
     private String elaborador;
@@ -20,8 +21,8 @@ public class EvaluacionDesempenoResponse {
     private Date fec_publicacion;
     private int descargas;
 
-    public EvaluacionDesempenoResponse(int id_evaluacion_desempeno, String descripcion) {
-        this.id_evaluacion_desempeno = id_evaluacion_desempeno;
-        this.descripcion = descripcion;
+    public OperacionesResponse(int id_operaciones, String operaciones) {
+        this.id_operaciones = id_operaciones;
+        this.operaciones = operaciones;
     }
 }

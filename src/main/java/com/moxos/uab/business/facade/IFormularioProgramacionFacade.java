@@ -1,14 +1,11 @@
 package com.moxos.uab.business.facade;
 
-import com.moxos.uab.domain.dto.request.DetallePeriodoProgramacion.DetallePeriodoProgramacionRequest;
 import com.moxos.uab.domain.dto.request.formulario.FormularioFilterRequest;
 import com.moxos.uab.domain.dto.request.formulario.FormularioRequest;
 import com.moxos.uab.domain.dto.request.general.FilterRequest;
 import com.moxos.uab.domain.dto.request.general.IndexViewModelFilter;
 import com.moxos.uab.domain.dto.request.general.ParametrosPaginacionBusquedaRequest;
 import com.moxos.uab.domain.dto.request.resultados.ResultadosRequest;
-import com.moxos.uab.domain.dto.request.resultadosgestion.ResultadosGestionRequest;
-import com.moxos.uab.domain.dto.response.DetallePeriodoProgramacion.DetallePeriodoProgramacionResponse;
 import com.moxos.uab.domain.dto.response.GeneralResponse;
 import com.moxos.uab.domain.dto.response.Response;
 import com.moxos.uab.domain.dto.response.formulario.FormularioProgramacionResponse;

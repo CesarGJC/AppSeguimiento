@@ -8,7 +8,7 @@ import com.moxos.uab.domain.dto.request.areasestrategicas.AreasEstrategicasReque
 import com.moxos.uab.domain.dto.request.catalogoindicadores.CatalogoIndicadoresRequest;
 import com.moxos.uab.domain.dto.request.catalogoindicadores.ParametroAreaEstrategicaRequest;
 import com.moxos.uab.domain.dto.request.categoriaindicador.CategoriaIndicadorRequest;
-import com.moxos.uab.domain.dto.request.evaluaciondesempeno.EvaluacionDesempenoRequest;
+import com.moxos.uab.domain.dto.request.operaciones.OperacionesRequest;
 import com.moxos.uab.domain.dto.request.general.IndexViewModelFilter;
 import com.moxos.uab.domain.dto.request.general.ParametrosPaginacionBusquedaRequest;
 import com.moxos.uab.domain.dto.request.indicadoresestrategicos.IndicadoresEstrategicosRequest;
@@ -28,7 +28,7 @@ import com.moxos.uab.domain.dto.response.areasestrategicas.AreaEstrategicaRespon
 import com.moxos.uab.domain.dto.response.areasestrategicas.AreasEstrategicasDeleteResponse;
 import com.moxos.uab.domain.dto.response.catalogoindicadores.CatalogoIndicadoresResponse;
 import com.moxos.uab.domain.dto.response.categoriaindicador.CategoriaIndicadorResponse;
-import com.moxos.uab.domain.dto.response.evaluaciondesempeno.EvaluacionDesempenoResponse;
+import com.moxos.uab.domain.dto.response.operaciones.OperacionesResponse;
 import com.moxos.uab.domain.dto.response.indicadoresestrategicos.IndicadoresEstrategicosResponse;
 import com.moxos.uab.domain.dto.response.objetivosestrategicos.ObjetivosEstrategicosResponse;
 import com.moxos.uab.domain.dto.response.pei.PeiResponse;
@@ -89,11 +89,7 @@ public interface IPoliticasIndicadoresAreasFacade {
 
     //Incio Evaluacion Desempeno: Cesar
 
-    EvaluacionDesempenoRequest getEvaluacionDesempeno(int idEvaluacion);
 
-    Response<EvaluacionDesempenoResponse> saveEvaluacionDesempeno(EvaluacionDesempenoRequest evaluacionDesempenoRequest);
-
-    GeneralResponse deleteEvaluacionDesempeno(EvaluacionDesempenoRequest model);
 
     //Final Evaluacion Desempeno: Cesar
     //Final Evaluacion Desempeno: Cesar

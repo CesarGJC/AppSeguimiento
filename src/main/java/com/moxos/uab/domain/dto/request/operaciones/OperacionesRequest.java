@@ -1,4 +1,4 @@
-package com.moxos.uab.domain.dto.request.evaluaciondesempeno;
+package com.moxos.uab.domain.dto.request.operaciones;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -7,14 +7,17 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class EvaluacionDesempenoRequest {
-    private int id_evaluacion_desempeno;
-    @NotNull(message = "Inserte Mensaje de Validacion")
-    private int id_resultados;
+public class OperacionesRequest {
+    private int id_operaciones;
     @NotNull(message = "Inserte Mensaje de Validacion")
     private int id_resultados_gestion;
     @NotNull(message = "Inserte Mensaje de Validacion")
     private int id_programa;
+    @NotNull(message = "Inserte Mensaje de Validacion")
+    private int id_departamento;
+    @NotNull(message = "Inserte Mensaje de Validacion")
+    @NotBlank(message = "Inserte Mensaje de Validacion")
+    private String operaciones;
     @NotNull(message = "Inserte Mensaje de Validacion")
     @NotBlank(message = "Inserte Mensaje de Validacion")
     private String titulo;
