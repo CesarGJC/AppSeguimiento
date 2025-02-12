@@ -17,6 +17,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface IFormularioProgramacionFacade {
+
     IndexViewModelFilter<FormularioResponse, Integer> getFormularioProgramacion(ParametrosPaginacionBusquedaRequest<FilterRequest<FormularioFilterRequest>> busqueda);
 
     Response<Integer> saveFormularioProgramacion(FormularioRequest model);

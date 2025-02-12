@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 public class OperacionesResponse {
     private int id_operaciones;
     private int id_resultados_gestion;
@@ -21,8 +20,4 @@ public class OperacionesResponse {
     private Date fec_publicacion;
     private int descargas;
 
-    public OperacionesResponse(int id_operaciones, String operaciones) {
-        this.id_operaciones = id_operaciones;
-        this.operaciones = operaciones;
-    }
 }
